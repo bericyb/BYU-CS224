@@ -1,0 +1,50 @@
+irmovq $0, %r10 # I
+irmovq $1, %r11 # increment
+irmovq $8, %r8 #Constant for iteration
+irmovq $2, %r9 #Constant for MAX
+subq %r9, %rax
+jl end
+rrmovq %rax, %r12
+
+irmovq data, %rcx #move pointer of head to RCX
+irmovq $0, %r14 #Bool value
+irmovq $0, %r13 #Bool value
+repeat:
+irmovq $0, %r14 #Bool value
+irmovq data, %rcx #move pointer of head to RCX
+rrmovq %r12, %rax
+top:
+mrmovq (%rcx), %rdx #move value of RCX pointer to rdx
+addq %r8, %rcx #move pointer to next 
+mrmovq (%rcx), %rbp #Move value of next to RBP
+rrmovq %rbp, %rsi
+subq %rdx, %rsi 
+jl swapper
+cont:
+
+subq %r11, %rax
+jge top
+
+subq %r13, %r14
+jne repeat
+halt
+
+
+
+
+
+
+swapper:
+irmovq $1, %r14
+rrmovq %rbp, %rdi
+rrmovq %rdx, %rbp
+rrmovq %rdi, %rdx
+rmmovq %rbp, (%rcx)
+subq %r8, %rcx
+rmmovq %rdx, (%rcx)
+addq %r8, %rcx
+jmp cont
+
+
+end:
+halt

@@ -1,0 +1,22 @@
+irmovq $10, %rax
+
+
+addq %rax, %rcx
+je ifzero
+
+rrmovq %rax, %rdx
+rrmovq %rbx, %rax
+rrmovq %rdx, %rbx
+
+irmovq a, %rdx
+mrmovq (%rdx), %rdx
+
+irmovq 0xbbbb, %rbx
+irmovq b, %rbp
+rmmovq %rbx, (%rbp)
+
+.align 8
+a: 
+.quad 0xaaaa
+b:
+.quad 0x0000

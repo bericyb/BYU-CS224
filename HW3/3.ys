@@ -1,0 +1,13 @@
+irmovq $8, %r8 #Constant for Iteration
+irmovq $0, %rax #Running sum in RAX
+
+irmovq elex, %rcx #Move pointer to head to RCX
+top:
+mrmovq (%rcx), %rdx #Move value of pointer at RCX to RDX
+addq %rdx, %rax
+addq %r8, %rcx #move pointer forward to the next
+mrmovq (%rcx), %rcx #move value of pointer to RCX? 
+irmovq $0, %r9 # constant to check if zero
+addq %rcx, %r9 #add to check if zero
+jne top #Jump to top if not zero
+

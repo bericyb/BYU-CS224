@@ -1,0 +1,12 @@
+irmovq $8, %r8 #Store constant for spacing
+irmovq $1, %r9 #Store constant for incrementing
+
+irmovq src, %rcx #point to src block
+irmovq dest, %rdx #point to dest block
+top:
+mrmovq (%rcx), %rbx #moving src mem to reg
+rmmovq %rbx, (%rdx)
+addq %r8, %rcx
+addq %r8, %rdx
+subq %r9, %rax
+jne top 
